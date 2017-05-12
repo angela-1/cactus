@@ -5,7 +5,7 @@
 
 ## 系统需求
 
-本工具最低需要 Misoft Office Word 2010 版软件。
+本工具最低需要 Microsoft Office Word 2010 版软件。
 
 ## 安装
 
