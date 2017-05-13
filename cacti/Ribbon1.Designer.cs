@@ -68,7 +68,7 @@
             // 
             this.button2.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
             this.button2.Image = global::cacti.Properties.Resources.brush;
-            this.button2.Label = "公文格式化";
+            this.button2.Label = "格式化";
             this.button2.Name = "button2";
             this.button2.ShowImage = true;
             this.button2.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button2_Click);
