@@ -33,7 +33,7 @@
     <PublishUrl>C:\Users\angela\Desktop\</PublishUrl>
     <InstallUrl />
     <TargetCulture>zh-chs</TargetCulture>
-    <ApplicationVersion>1.0.0.3</ApplicationVersion>
+    <ApplicationVersion>1.0.0.4</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>7</UpdateInterval>
@@ -212,6 +212,8 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="comment.png" />
+    <None Include="brush.png" />
     <Content Include="cacti.png" />
   </ItemGroup>
   <PropertyGroup>

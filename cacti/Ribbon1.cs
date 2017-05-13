@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Office.Tools.Ribbon;
 using Microsoft.Office.Interop.Word;
+using System.Text.RegularExpressions;
 
 namespace cacti
 {
@@ -25,10 +26,8 @@ namespace cacti
             string[,] commentsArray = new string[rows, 5];
 
             int p = 0;
-
             foreach (Comment c in doc.Comments)
             {
-
                 //页码;
                 commentsArray[p, 0] = Convert.ToString(c.Scope.Information[WdInformation.wdActiveEndPageNumber]);
                 //行号;
@@ -39,21 +38,12 @@ namespace cacti
                 commentsArray[p, 3] = c.Range.Text;
                 //作者;
                 commentsArray[p, 4] = c.Author;
-
                 p = p + 1;
-
             }
 
-            //Application newApp = new Application();
-            //newApp.Visible = true;
             Document newDoc = null;
-
-
             // Create An New Word   
-
             newDoc = Globals.ThisAddIn.Application.Documents.Add();
-            //newDoc = newApp.Documents.Add();
-
             newDoc.Content.ParagraphFormat.CharacterUnitFirstLineIndent = 2;
             newDoc.Content.Paragraphs[1].Range.Font.Size = 16;
             newDoc.Content.Paragraphs[1].Range.Font.Name = "方正仿宋_GBK";
@@ -76,6 +66,109 @@ namespace cacti
                 par.Range.InsertParagraphAfter();
             }
 
+        }
+
+        private bool _match_regex(string text, Regex re)
+        {
+            if (re.IsMatch(text))
+                return true;
+            else return false;
+        }
+
+        private int _get_format_end(Paragraphs pars)
+        {
+            int endFormatPar = 0;
+            foreach (Paragraph par in pars)
+            {
+                Regex reEnd = new Regex("抄送：");
+                if (this._match_regex(par.Range.Text, reEnd))
+                    break;
+                endFormatPar += 1;
+            }
+            return endFormatPar;
+        }
+
+        private int _get_format_start(Selection cursor, Paragraphs pars)
+        {
+            int startFormatPar = 0;
+            foreach (Paragraph par in pars)
+            {
+                if (par.Range.Start > cursor.Start)
+                    break;
+                startFormatPar += 1;
+            }
+            return startFormatPar;
+        }
+
+        private void button2_Click(object sender, RibbonControlEventArgs e)
+        {
+            Document thisDoc = Globals.ThisAddIn.Application.ActiveDocument;
+            Paragraphs pars = thisDoc.Paragraphs;
+            int parCount = thisDoc.Paragraphs.Count;
+            Selection cursor = Globals.ThisAddIn.Application.Selection;
+            //for (int i = 1; i < parCount; i++)
+            //{
+            //    Paragraph par = pars[i];
+            //    if (par.Range.Text != "")
+            //    {
+            //        System.Windows.Forms.MessageBox.Show("kong");
+            //        par.Range.Text = par.Range.Text.TrimStart().Replace("　", "");
+            //    }
+            //}
+
+            // 获取要修改样式的开头段落和结尾段落
+            // 开头通过光标位置获取，结尾通过检测“抄送：”字符获取
+            int startFormatPar = this._get_format_start(cursor, pars);
+            int endFormatPar = this._get_format_end(pars);
+
+            //System.Windows.Forms.MessageBox.Show("start par: " + startFormatPar
+            //    + "end par:" + endFormatPar + "total par:" + parCount);
+
+            for (int i = startFormatPar; i < endFormatPar; i++)
+            {
+                Paragraph par = pars[i];
+                par.Range.Text = par.Range.Text.Replace("　", "").Replace(" ", "");
+            }
+
+            // 各级标题通过正则表达式检测
+            Regex reLevel1 = new Regex("^[一二三四五六七八九十]+、");
+            Regex reLevel2 = new Regex("^（[一二三四五六七八九十]+）");
+            Regex reLevel3 = new Regex("^[0-9]. ");
+
+            // 正则检测每段开头对应修改样式
+            for (int i = startFormatPar; i < endFormatPar; i++)
+            {
+                Paragraph par = pars[i];
+
+                // 需要格式化的从开头到结尾都是首行缩进2字符，三号字，固定行距28磅
+                par.CharacterUnitFirstLineIndent = 2;
+                par.Range.Font.Size = 16;
+                par.LineSpacingRule = WdLineSpacing.wdLineSpaceExactly;
+                par.LineSpacing = 28;
+
+                string lineStart = par.Range.Text;
+                // 一级标题黑体
+                if (reLevel1.IsMatch(lineStart))
+                {
+                    par.Range.Font.Name = "黑体";
+                    par.Range.Font.NameAscii = "Tmimes New Roman";
+                }
+                // 二级标题楷体
+                else if (reLevel2.IsMatch(lineStart))
+                {
+                    par.Range.Font.Name = "楷体";
+                    par.Range.Font.NameAscii = "Tmimes New Roman";
+                }
+                // 三级和其他全部都是方正仿宋
+                else
+                {
+                    par.Range.Font.Size = 16;
+                    par.Range.Font.Name = "方正仿宋_GBK";
+                    par.Range.Font.NameAscii = "Tmimes New Roman";
+                }
+            }
+
+            System.Windows.Forms.MessageBox.Show("格式化完成。");
         }
     }
 }
