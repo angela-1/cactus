@@ -106,15 +106,6 @@ namespace cacti
             Paragraphs pars = thisDoc.Paragraphs;
             int parCount = thisDoc.Paragraphs.Count;
             Selection cursor = Globals.ThisAddIn.Application.Selection;
-            //for (int i = 1; i < parCount; i++)
-            //{
-            //    Paragraph par = pars[i];
-            //    if (par.Range.Text != "")
-            //    {
-            //        System.Windows.Forms.MessageBox.Show("kong");
-            //        par.Range.Text = par.Range.Text.TrimStart().Replace("　", "");
-            //    }
-            //}
 
             // 获取要修改样式的开头段落和结尾段落
             // 开头通过光标位置获取，结尾通过检测“抄送：”字符获取
