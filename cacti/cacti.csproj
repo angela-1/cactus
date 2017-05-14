@@ -30,7 +30,7 @@
     <DefineConstants>VSTO40</DefineConstants>
     <IsWebBootstrapper>False</IsWebBootstrapper>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <PublishUrl>C:\Users\angela\Desktop\</PublishUrl>
+    <PublishUrl>C:\Users\angela\Desktop\cacti\</PublishUrl>
     <InstallUrl />
     <TargetCulture>zh-chs</TargetCulture>
     <ApplicationVersion>1.0.0.7</ApplicationVersion>
