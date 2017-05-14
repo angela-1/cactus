@@ -75,13 +75,19 @@ namespace cacti
             else return false;
         }
 
-        private int _get_format_end(Paragraphs pars)
+        private int _get_format_end(Selection cursor, Paragraphs pars)
         {
             int endFormatPar = 0;
+            //foreach (Paragraph par in pars)
+            //{
+            //    Regex reEnd = new Regex("抄送：");
+            //    if (this._match_regex(par.Range.Text, reEnd))
+            //        break;
+            //    endFormatPar += 1;
+            //}
             foreach (Paragraph par in pars)
             {
-                Regex reEnd = new Regex("抄送：");
-                if (this._match_regex(par.Range.Text, reEnd))
+                if (par.Range.Start > cursor.End)
                     break;
                 endFormatPar += 1;
             }
@@ -107,10 +113,17 @@ namespace cacti
             int parCount = thisDoc.Paragraphs.Count;
             Selection cursor = Globals.ThisAddIn.Application.Selection;
 
+            // 判断是否选择了段落
+            if (cursor.Paragraphs.Count <= 1)
+            {
+                System.Windows.Forms.MessageBox.Show("请选中要格式化的段落。");
+                return;
+            }
+
             // 获取要修改样式的开头段落和结尾段落
             // 开头通过光标位置获取，结尾通过检测“抄送：”字符获取
             int startFormatPar = this._get_format_start(cursor, pars);
-            int endFormatPar = this._get_format_end(pars);
+            int endFormatPar = this._get_format_end(cursor, pars);
 
             //System.Windows.Forms.MessageBox.Show("start par: " + startFormatPar
             //    + "end par:" + endFormatPar + "total par:" + parCount);
@@ -124,7 +137,7 @@ namespace cacti
             // 各级标题通过正则表达式检测
             Regex reLevel1 = new Regex("^[一二三四五六七八九十]+、");
             Regex reLevel2 = new Regex("^（[一二三四五六七八九十]+）");
-            Regex reLevel3 = new Regex("^[0-9]. ");
+            //Regex reLevel3 = new Regex("^[0-9]. ");
 
             // 正则检测每段开头对应修改样式
             for (int i = startFormatPar; i < endFormatPar; i++)
