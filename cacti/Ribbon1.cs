@@ -78,13 +78,6 @@ namespace cacti
         private int _get_format_end(Selection cursor, Paragraphs pars)
         {
             int endFormatPar = 0;
-            //foreach (Paragraph par in pars)
-            //{
-            //    Regex reEnd = new Regex("抄送：");
-            //    if (this._match_regex(par.Range.Text, reEnd))
-            //        break;
-            //    endFormatPar += 1;
-            //}
             foreach (Paragraph par in pars)
             {
                 if (par.Range.Start > cursor.End)
@@ -120,7 +113,7 @@ namespace cacti
                 return;
             }
 
-            // 获取要修改样式的开头段落和结尾段落
+            // 获取选中的要修改样式的开头段落和结尾段落
             // 开头通过光标位置获取，结尾通过检测“抄送：”字符获取
             int startFormatPar = this._get_format_start(cursor, pars);
             int endFormatPar = this._get_format_end(cursor, pars);
