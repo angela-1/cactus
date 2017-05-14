@@ -5,7 +5,7 @@ Word 审阅工具集，包含导出 Word 文档批注和根据按预定格式要
 
 ## 系统需求
 
-本工具针对需要 Microsoft Office Word 2010 版软件。其他版本 Word 不支持。
+本工具针对需要 Microsoft Office Word 2010 版软件。Word 2007 版本经测试可以支持。
 
 ## 安装
 
