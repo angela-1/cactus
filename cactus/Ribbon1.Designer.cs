@@ -1,4 +1,4 @@
-﻿namespace cacti
+﻿namespace cactus
 {
     partial class Ribbon1 : Microsoft.Office.Tools.Ribbon.RibbonBase
     {
@@ -45,7 +45,7 @@
             // tab1
             // 
             this.tab1.Groups.Add(this.group1);
-            this.tab1.Label = "Cacti";
+            this.tab1.Label = "Cactus";
             this.tab1.Name = "tab1";
             // 
             // group1
@@ -58,7 +58,7 @@
             // button1
             // 
             this.button1.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.button1.Image = global::cacti.Properties.Resources.comment;
+            this.button1.Image = global::cactus.Properties.Resources.comment;
             this.button1.Label = "导出批注";
             this.button1.Name = "button1";
             this.button1.ShowImage = true;
@@ -67,8 +67,8 @@
             // button2
             // 
             this.button2.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.button2.Image = global::cacti.Properties.Resources.brush;
-            this.button2.Label = "格式化";
+            this.button2.Image = global::cactus.Properties.Resources.brush;
+            this.button2.Label = "套用格式";
             this.button2.Name = "button2";
             this.button2.ShowImage = true;
             this.button2.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button2_Click);

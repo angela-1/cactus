@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace cacti.Properties {
+namespace cactus.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace cacti.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("cacti.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("cactus.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -66,16 +66,6 @@ namespace cacti.Properties {
         internal static System.Drawing.Bitmap brush {
             get {
                 object obj = ResourceManager.GetObject("brush", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap cacti {
-            get {
-                object obj = ResourceManager.GetObject("cacti", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

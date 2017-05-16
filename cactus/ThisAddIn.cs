@@ -7,7 +7,7 @@ using Word = Microsoft.Office.Interop.Word;
 using Office = Microsoft.Office.Core;
 using Microsoft.Office.Tools.Word;
 
-namespace cacti
+namespace cactus
 {
     public partial class ThisAddIn
     {

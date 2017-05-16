@@ -6,11 +6,11 @@ using System.Security;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("cacti")]
+[assembly: AssemblyTitle("cactus")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("cacti")]
+[assembly: AssemblyProduct("cactus")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -21,7 +21,7 @@ using System.Security;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("368c5c3c-80c3-497a-8ee9-9bf5844debd8")]
+[assembly: Guid("a378a659-0583-4ffa-b466-9c6e82b2ae1d")]
 
 // 程序集的版本信息由下列四个值组成: 
 //

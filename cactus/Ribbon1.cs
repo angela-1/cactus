@@ -6,7 +6,7 @@ using Microsoft.Office.Tools.Ribbon;
 using Microsoft.Office.Interop.Word;
 using System.Text.RegularExpressions;
 
-namespace cacti
+namespace cactus
 {
     public partial class Ribbon1
     {
@@ -20,8 +20,7 @@ namespace cacti
             Document doc = Globals.ThisAddIn.Application.ActiveDocument;
 
             string fileName = doc.Name;
-            string commentFileName = doc.Path + "\\" + "批注_" + doc.Name;
-
+           
             int rows = doc.Comments.Count;
             string[,] commentsArray = new string[rows, 5];
 
@@ -98,7 +97,6 @@ namespace cacti
             }
             return startFormatPar;
         }
-
         private void button2_Click(object sender, RibbonControlEventArgs e)
         {
             Document thisDoc = Globals.ThisAddIn.Application.ActiveDocument;
