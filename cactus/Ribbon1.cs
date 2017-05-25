@@ -138,8 +138,11 @@ namespace cactus
                 // 需要格式化的从开头到结尾都是首行缩进2字符，三号字，固定行距28磅
                 par.CharacterUnitFirstLineIndent = 2;
                 par.Range.Font.Size = 16;
+                par.Range.Font.Bold = 0;
                 par.LineSpacingRule = WdLineSpacing.wdLineSpaceExactly;
                 par.LineSpacing = 28;
+                par.SpaceBefore = 0;
+                par.SpaceAfter = 0;
 
                 string lineStart = par.Range.Text;
                 // 一级标题黑体
