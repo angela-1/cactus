@@ -20,7 +20,7 @@ namespace cactus
             Document doc = Globals.ThisAddIn.Application.ActiveDocument;
 
             string fileName = doc.Name;
-           
+
             int rows = doc.Comments.Count;
             string[,] commentsArray = new string[rows, 5];
 
@@ -112,12 +112,20 @@ namespace cactus
             }
 
             // 获取选中的要修改样式的开头段落和结尾段落
-            // 开头通过光标位置获取，结尾通过检测“抄送：”字符获取
+            //
             int startFormatPar = this._get_format_start(cursor, pars);
             int endFormatPar = this._get_format_end(cursor, pars);
 
             //System.Windows.Forms.MessageBox.Show("start par: " + startFormatPar
             //    + "end par:" + endFormatPar + "total par:" + parCount);
+
+            // 各级标题通过正则表达式检测
+            Regex reLevel1 = new Regex("^[一二三四五六七八九十]+、");
+            Regex reLevel2 = new Regex("^（[一二三四五六七八九十]+）");
+            //Regex reLevel3 = new Regex("^[0-9]. ");
+
+            Boolean level1FontLock = true;
+            Boolean level2FontLock = true;
 
             for (int i = startFormatPar; i < endFormatPar; i++)
             {
@@ -125,10 +133,21 @@ namespace cactus
                 par.Range.Text = par.Range.Text.Replace("　", "").Replace(" ", "");
             }
 
-            // 各级标题通过正则表达式检测
-            Regex reLevel1 = new Regex("^[一二三四五六七八九十]+、");
-            Regex reLevel2 = new Regex("^（[一二三四五六七八九十]+）");
-            //Regex reLevel3 = new Regex("^[0-9]. ");
+            for (int i = startFormatPar; i < endFormatPar; i++)
+            {
+                Paragraph par = pars[i];
+                string lineStart = par.Range.Text;
+                if (reLevel1.IsMatch(lineStart, 0) && lineStart.Length > 24)
+                {
+                    level1FontLock = false;
+                    break;
+                }
+                if (reLevel2.IsMatch(lineStart) && lineStart.Length > 24)
+                {
+                    level2FontLock = false;
+                    break;
+                }
+            }
 
             // 正则检测每段开头对应修改样式
             for (int i = startFormatPar; i < endFormatPar; i++)
@@ -145,14 +164,15 @@ namespace cactus
                 par.SpaceAfter = 0;
 
                 string lineStart = par.Range.Text;
+
                 // 一级标题黑体
-                if (reLevel1.IsMatch(lineStart))
+                if (level1FontLock && reLevel1.IsMatch(lineStart))
                 {
                     par.Range.Font.Name = "黑体";
                     par.Range.Font.NameAscii = "Tmimes New Roman";
                 }
                 // 二级标题楷体
-                else if (reLevel2.IsMatch(lineStart))
+                else if (level2FontLock && reLevel2.IsMatch(lineStart))
                 {
                     par.Range.Font.Name = "楷体";
                     par.Range.Font.NameAscii = "Tmimes New Roman";
