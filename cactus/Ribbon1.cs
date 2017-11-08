@@ -188,5 +188,12 @@ namespace cactus
 
             System.Windows.Forms.MessageBox.Show("格式化完成。");
         }
+
+        private void button3_Click(object sender, RibbonControlEventArgs e)
+        {
+            // 提取责任单位，牵头部门
+            OrgFinder of = new OrgFinder();
+            of.getOrgs();
+        }
     }
 }
