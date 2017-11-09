@@ -170,10 +170,14 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="CommentFinder.cs" />
+    <Compile Include="Formatter.cs" />
+    <Compile Include="IFinder.cs" />
     <Compile Include="OrgFinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="TitleFinder.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

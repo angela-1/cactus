@@ -10,8 +10,10 @@ using System.Threading.Tasks;
 
 namespace cactus
 {
-    class OrgFinder
+    class OrgFinder : IFinder
     {
+        // 查找责任单位/牵头部门并提取
+
         private String src_file_path;
         private String file_path;
         private Regex reg;
@@ -23,7 +25,7 @@ namespace cactus
             reg = new Regex(@"（[责牵]\S+）$");
         }
 
-        public void getOrgs()
+        public void getContent()
         {
             __parse_file();
 
@@ -35,19 +37,15 @@ namespace cactus
             if (a.Count > 0)
             {
                 SortedSet<String> b = __strip_brackets(a);
-                __remove_tmp();
+                
                 __print_to_file(b);
 
             } else
             {
                 System.Windows.Forms.MessageBox.Show("未找到符合条件的项。");
-
-                __remove_tmp();
             }
 
-
-
-
+            __remove_tmp();
         }
 
         private void __remove_tmp()
