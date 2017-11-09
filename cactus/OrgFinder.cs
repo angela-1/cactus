@@ -10,25 +10,18 @@ using System.Threading.Tasks;
 
 namespace cactus
 {
-    class OrgFinder : IFinder
+    class OrgFinder : AFinder
     {
         // 查找责任单位/牵头部门并提取
-
-        private String src_file_path;
-        private String file_path;
         private Regex reg;
 
         public OrgFinder()
         {
-            src_file_path = "";
-            file_path = "";
             reg = new Regex(@"（[责牵]\S+）$");
         }
 
-        public void getContent()
+        public override void GetContent()
         {
-            __parse_file();
-
             // 新建文档填入单位名称
             //System.Windows.Forms.MessageBox.Show("新建文件了。");
 
@@ -45,31 +38,12 @@ namespace cactus
                 System.Windows.Forms.MessageBox.Show("未找到符合条件的项。");
             }
 
-            __remove_tmp();
-        }
-
-        private void __remove_tmp()
-        {
-            File.Delete(file_path);
-        }
-
-        private String __parse_file()
-        {
-            Document doc = Globals.ThisAddIn.Application.ActiveDocument;
-            src_file_path = doc.Path + "\\" + doc.Name;
-
-            file_path = Path.GetTempFileName();
-            //Debug.WriteLine(fileName);
-
-            doc.SaveAs2(file_path, WdSaveFormat.wdFormatText);
-            doc.Close();
-
-            return src_file_path;
+            ClearTmp();
         }
 
         private List<String> __search_file()
         {
-            StreamReader sr = new StreamReader(file_path, Encoding.Default);
+            StreamReader sr = new StreamReader(tmp_file, Encoding.Default);
             String line;
             List<String> draft_list = new List<String>();
 
@@ -119,7 +93,7 @@ namespace cactus
             newDoc.Content.Paragraphs[1].Range.Font.NameAscii = "Times New Roman";
             Paragraph par = newDoc.Content.Paragraphs.Add();
 
-            par.Range.Text = "来自文档：“" + src_file_path + "”中出现的单位共" + final_list.Count + "家。";
+            par.Range.Text = "来自文档：“" + src_file+ "”中出现的单位共" + final_list.Count + "家。";
             par.Range.InsertParagraphAfter();
 
             par.Range.InsertAfter("--------------------------------分割线-------------------------------");

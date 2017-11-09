@@ -34,7 +34,7 @@
     <PublishUrl>C:\Users\angela\Desktop\cactus\</PublishUrl>
     <InstallUrl />
     <TargetCulture>zh-chs</TargetCulture>
-    <ApplicationVersion>1.0.0.8</ApplicationVersion>
+    <ApplicationVersion>1.0.0.9</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>7</UpdateInterval>
@@ -175,9 +175,9 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="AFinder.cs" />
     <Compile Include="CommentFinder.cs" />
     <Compile Include="Formatter.cs" />
-    <Compile Include="IFinder.cs" />
     <Compile Include="OrgFinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

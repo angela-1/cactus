@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace cactus
 {
-    class CommentFinder : IFinder
+    class CommentFinder
     {
         // 查找注释并提取出来
 
-        public void getContent()
+        public void GetContent()
         {
             Document doc = Globals.ThisAddIn.Application.ActiveDocument;
 

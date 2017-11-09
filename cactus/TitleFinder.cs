@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -9,60 +10,50 @@ using System.Threading.Tasks;
 
 namespace cactus
 {
-    class TitleFinder : IFinder
+    class TitleFinder : AFinder
     {
         // 查找一级标题并提取
-
-        private String src_file_path;
         private int type;
+        private Regex reLevel1;
+        private Regex reLevel2;
 
         public TitleFinder(int find_type)
         {
-            type = find_type; 
-            src_file_path = "";
+            type = find_type;
+            reLevel1 = new Regex("^[一二三四五六七八九十]+、");
+            reLevel2 = new Regex("^（[一二三四五六七八九十]+）");
         }
 
         private List<String> __parse_file()
         {
-            Document thisDoc = Globals.ThisAddIn.Application.ActiveDocument;
-            src_file_path = thisDoc.Path + "\\" + thisDoc.Name;
-            Paragraphs pars = thisDoc.Paragraphs;
-            int parCount = thisDoc.Paragraphs.Count;
- 
-            // 各级标题通过正则表达式检测
-            Regex reLevel1 = new Regex("^[一二三四五六七八九十]+、");
-            Regex reLevel2 = new Regex("^（[一二三四五六七八九十]+）");
-
-            List<String> title_list = new List<String>();
-
-            int startFormatPar = 1;
-            int endFormatPar = pars.Count;
-
-            for (int i = startFormatPar; i < endFormatPar; i++)
-            {
-                Paragraph par = pars[i];
-                par.Range.Text = par.Range.Text.Replace("　", "").Replace(" ", "");
-            }
+            StreamReader sr = new StreamReader(tmp_file, Encoding.Default);
+            String line;
+            List<String> draft_list = new List<String>();
 
             Regex reg;
             if (type == 1)
             {
                 reg = reLevel1;
-            } else
+            }
+            else
             {
                 reg = reLevel2;
             }
 
-            foreach (Paragraph item in pars)
+            while ((line = sr.ReadLine()) != null)
             {
-                String lineStart = item.Range.Text;
-                
-                if (reg.IsMatch(lineStart, 0))
+                Match match = reg.Match(line.TrimStart());
+                if (match.Success)
                 {
-                    title_list.Add(lineStart);
+                    String b = match.Groups[0].ToString();
+                    draft_list.Add(line);
+                    //System.Windows.Forms.MessageBox.Show("bb" + line.Trim() + "\n");
+
                 }
+                //Debug.WriteLine(match.ToString(), line.ToString());
             }
-            return title_list;
+            sr.Close();
+            return draft_list;
         }
 
         private void __print_to_file(List<String> final_list)
@@ -75,7 +66,7 @@ namespace cactus
             newDoc.Content.Paragraphs[1].Range.Font.NameAscii = "Times New Roman";
             Paragraph par = newDoc.Content.Paragraphs.Add();
 
-            par.Range.Text = "来自文档：“" + src_file_path + "”中的一级标题共" + final_list.Count + "项。";
+            par.Range.Text = "来自文档：“" + src_file + "”中的一级标题共" + final_list.Count + "项。";
             par.Range.InsertParagraphAfter();
 
             par.Range.InsertAfter("--------------------------------分割线-------------------------------");
@@ -87,13 +78,15 @@ namespace cactus
             foreach (String item in final_list)
             {
                 par.Range.InsertAfter(item);
+                par.Range.InsertParagraphAfter();
             }
         }
 
-        public void getContent()
+        public override void GetContent()
         {
             List<String> list = __parse_file();
             __print_to_file(list);
+            ClearTmp();
         }
     }
 }
