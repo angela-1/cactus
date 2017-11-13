@@ -22,18 +22,16 @@ namespace cactus
 
         public override void GetContent()
         {
-            // 新建文档填入单位名称
-            //System.Windows.Forms.MessageBox.Show("新建文件了。");
-
             List<String> a = __search_file();
 
             if (a.Count > 0)
             {
                 SortedSet<String> b = __strip_brackets(a);
-                
+
                 __print_to_file(b);
 
-            } else
+            }
+            else
             {
                 System.Windows.Forms.MessageBox.Show("未找到符合条件的项。");
             }
@@ -93,7 +91,7 @@ namespace cactus
             newDoc.Content.Paragraphs[1].Range.Font.NameAscii = "Times New Roman";
             Paragraph par = newDoc.Content.Paragraphs.Add();
 
-            par.Range.Text = "来自文档：“" + src_file+ "”中出现的单位共" + final_list.Count + "家。";
+            par.Range.Text = "来自文档：“" + src_file + "”中出现的单位共" + final_list.Count + "家。";
             par.Range.InsertParagraphAfter();
 
             par.Range.InsertAfter("--------------------------------分割线-------------------------------");

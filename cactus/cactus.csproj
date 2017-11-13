@@ -25,7 +25,7 @@
     <OutputType>Library</OutputType>
     <NoStandardLibraries>false</NoStandardLibraries>
     <RootNamespace>cactus</RootNamespace>
-    <AssemblyName>Cactus - Word 文档审阅工具</AssemblyName>
+    <AssemblyName>仙人掌 - Word 文档审阅工具</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <DefineConstants>VSTO40</DefineConstants>
     <IsWebBootstrapper>False</IsWebBootstrapper>
