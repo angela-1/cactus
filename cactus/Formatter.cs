@@ -18,6 +18,8 @@ namespace cactus
             int parCount = thisDoc.Paragraphs.Count;
             Selection cursor = Globals.ThisAddIn.Application.Selection;
 
+            thisDoc.Content.ListFormat.ConvertNumbersToText();
+
             // 判断是否选择了段落
             if (cursor.Paragraphs.Count <= 1)
             {
