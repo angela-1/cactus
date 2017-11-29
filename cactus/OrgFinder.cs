@@ -12,30 +12,18 @@ namespace cactus
 {
     class OrgFinder : AFinder
     {
-        // 查找责任单位/牵头部门并提取
-        private Regex reg;
-
-        public OrgFinder()
-        {
-            reg = new Regex(@"（[责牵]\S+）$");
-        }
-
         public override void GetContent()
         {
             List<String> a = __search_file();
-
             if (a.Count > 0)
             {
                 SortedSet<String> b = __strip_brackets(a);
-
                 __print_to_file(b);
-
             }
             else
             {
                 System.Windows.Forms.MessageBox.Show("未找到符合条件的项。");
             }
-
             ClearTmp();
         }
 
@@ -45,6 +33,7 @@ namespace cactus
             String line;
             List<String> draft_list = new List<String>();
 
+            Regex reg = new Regex(@"（(牵头|责任|配合)(单位|部门)：\S+）$");
             while ((line = sr.ReadLine()) != null)
             {
                 Match match = reg.Match(line);
@@ -52,8 +41,6 @@ namespace cactus
                 {
                     String b = match.Groups[0].ToString();
                     draft_list.Add(b);
-                    //System.Windows.Forms.MessageBox.Show("bb" + b);
-
                 }
                 //Debug.WriteLine(match.ToString(), line.ToString());
             }
@@ -64,15 +51,18 @@ namespace cactus
         private SortedSet<String> __strip_brackets(List<String> draft_list)
         {
             SortedSet<String> final_list = new SortedSet<String>();
-            char[] trimChars = { '（', '）' };
+            char[] trimChars = { '（', '）', ' ' };
             foreach (String item in draft_list)
             {
-                String[] a = item.Trim(trimChars).Split('：');
-                String[] b = a[1].Split('、');
+                Regex sp = new Regex(@"(牵头|责任|配合)(单位|部门)：");
+                Regex sp2 = new Regex(@"[：，。]");
+                String newitem = sp2.Replace(sp.Replace(item, ""), "、");
+                String a = newitem.Trim(trimChars);
+                String[] b = a.Split('、');
                 foreach (String c in b)
                 {
                     final_list.Add(c);
-                    //Debug.WriteLine(c);
+                    Debug.WriteLine(c);
 
                 }
             }
