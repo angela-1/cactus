@@ -44,7 +44,7 @@
     <SupportUrl>https://github.com/angela-1/cactus</SupportUrl>
     <FriendlyName>仙人掌 - Word 文档审阅工具</FriendlyName>
     <OfficeApplicationDescription>Word 文档审阅工具集合。</OfficeApplicationDescription>
-    <LoadBehavior>16</LoadBehavior>
+    <LoadBehavior>3</LoadBehavior>
   </PropertyGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">

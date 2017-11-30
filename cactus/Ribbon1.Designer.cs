@@ -36,9 +36,9 @@
         {
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
-            this.separator1 = this.Factory.CreateRibbonSeparator();
             this.button1 = this.Factory.CreateRibbonButton();
             this.button2 = this.Factory.CreateRibbonButton();
+            this.separator1 = this.Factory.CreateRibbonSeparator();
             this.splitButton1 = this.Factory.CreateRibbonSplitButton();
             this.button6 = this.Factory.CreateRibbonButton();
             this.button4 = this.Factory.CreateRibbonButton();
@@ -64,10 +64,6 @@
             this.group1.Label = "审阅工具";
             this.group1.Name = "group1";
             // 
-            // separator1
-            // 
-            this.separator1.Name = "separator1";
-            // 
             // button1
             // 
             this.button1.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
@@ -87,6 +83,10 @@
             this.button2.ShowImage = true;
             this.button2.SuperTip = "按照公文样式要求对文档样式进行修改。";
             this.button2.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button2_Click);
+            // 
+            // separator1
+            // 
+            this.separator1.Name = "separator1";
             // 
             // splitButton1
             // 
