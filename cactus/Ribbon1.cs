@@ -48,5 +48,17 @@ namespace cactus
             TitleFinder t2 = new TitleFinder(2);
             t2.GetContent();
         }
+
+        private void button3_Click(object sender, RibbonControlEventArgs e)
+        {
+            Form1 f = new Form1();
+            f.Show();
+
+
+            //DivisionFinder df = new DivisionFinder();
+            //df.GetContent();
+
+            
+        }
     }
 }

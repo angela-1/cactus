@@ -32,7 +32,6 @@ namespace cactus
 
             newDoc.SaveAs2(tmp_file, WdSaveFormat.wdFormatText);
             newDoc.Close();
-            
         }
 
         public abstract void GetContent();
