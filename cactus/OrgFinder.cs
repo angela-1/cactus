@@ -14,41 +14,40 @@ namespace cactus
     {
         public override void GetContent()
         {
-            List<String> a = __search_file();
+            List<String> a = _search();
             if (a.Count > 0)
             {
-                SortedSet<String> b = __strip_brackets(a);
-                __print_to_file(b);
+                SortedSet<String> b = _strip_brackets(a);
+                _print_to_file(b);
             }
             else
             {
                 System.Windows.Forms.MessageBox.Show("未找到符合条件的项。");
             }
-            ClearTmp();
         }
 
-        private List<String> __search_file()
+        private List<String> _search()
         {
-            StreamReader sr = new StreamReader(tmp_file, Encoding.Default);
-            String line;
-            List<String> draft_list = new List<String>();
+            Document this_doc = Globals.ThisAddIn.Application.ActiveDocument;
+            Paragraphs pars = this_doc.Paragraphs;
 
+            List<String> draft_list = new List<String>();
             Regex reg = new Regex(@"（(牵头|责任|配合)(单位|部门)：\S+）$");
-            while ((line = sr.ReadLine()) != null)
+
+            foreach (Paragraph par in pars)
             {
+                String line = par.Range.Text.Trim();
                 Match match = reg.Match(line);
                 if (match.Success)
                 {
                     String b = match.Groups[0].ToString();
                     draft_list.Add(b);
                 }
-                //Debug.WriteLine(match.ToString(), line.ToString());
             }
-            sr.Close();
             return draft_list;
         }
 
-        private SortedSet<String> __strip_brackets(List<String> draft_list)
+        private SortedSet<String> _strip_brackets(List<String> draft_list)
         {
             SortedSet<String> final_list = new SortedSet<String>();
             char[] trimChars = { '（', '）', ' ' };
@@ -67,11 +66,10 @@ namespace cactus
                 }
             }
             //System.Windows.Forms.MessageBox.Show("dd");
-
             return final_list;
         }
 
-        private void __print_to_file(SortedSet<String> final_list)
+        private void _print_to_file(SortedSet<String> final_list)
         {
             Document newDoc = null;
             // Create An New Word   
@@ -95,6 +93,5 @@ namespace cactus
                 par.Range.InsertAfter(item + "、");
             }
         }
-
     }
 }

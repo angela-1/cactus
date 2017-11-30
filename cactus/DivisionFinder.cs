@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -13,15 +14,23 @@ namespace cactus
     {
         private String _org;
 
-        public DivisionFinder(String org)
+        public DivisionFinder(String org) : base()
         {
+           
             _org = org;
         }
 
         public override void GetContent()
         {
             List<String> final_list = _search();
-            _print_to_file(final_list);
+            if (final_list.Count > 0)
+            {
+                _print_to_file(final_list);
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("未找到符合条件的项。");
+            }
         }
 
 

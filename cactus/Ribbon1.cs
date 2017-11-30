@@ -9,6 +9,7 @@ namespace cactus
             splitButton1.Label = "提取内容\n";
             button1.Label = "导出批注\n";
             button2.Label = "套用格式\n";
+            button3.Label = "查找内容\n";
         }
 
         private void button1_Click(object sender, RibbonControlEventArgs e)
@@ -53,12 +54,6 @@ namespace cactus
         {
             Form1 f = new Form1();
             f.Show();
-
-
-            //DivisionFinder df = new DivisionFinder();
-            //df.GetContent();
-
-            
         }
     }
 }

@@ -49,6 +49,8 @@ namespace cactus
             newDoc.Content.ParagraphFormat.CharacterUnitFirstLineIndent = 2;
             newDoc.Content.Paragraphs[1].Range.Font.Size = 16;
             newDoc.Content.Paragraphs[1].Range.Font.Name = "方正仿宋_GBK";
+            newDoc.Content.Paragraphs[1].Range.Font.NameAscii = "Times New Roman";
+
             Paragraph par = newDoc.Content.Paragraphs.Add();
             par.Range.Text = "导出批注工具";
             par.Range.InsertParagraphAfter();

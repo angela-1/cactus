@@ -20,10 +20,19 @@ namespace cactus
         private void button1_Click(object sender, EventArgs e)
         {
             String org = textBox1.Text;
-
-            DivisionFinder df = new DivisionFinder(org);
-            df.GetContent();
+            if (org == "")
+            {
+                MessageBox.Show("请输入关键字。");
+            } else
+            {
+                Close();
+                DivisionFinder df = new DivisionFinder(org);
+                df.GetContent();
+            }
+           
 
         }
+
+        
     }
 }
