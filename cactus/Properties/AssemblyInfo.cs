@@ -6,12 +6,12 @@ using System.Security;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("cactus")]
+[assembly: AssemblyTitle("仙人掌 - Word 文档审阅工具")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("cactus")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
+[assembly: AssemblyCopyright("Copyright ©  2017 Angela")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
