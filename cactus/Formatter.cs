@@ -113,7 +113,7 @@ namespace cactus
                     break;
                 endFormatPar += 1;
             }
-            return endFormatPar;
+            return endFormatPar + 1;
         }
 
         private int _get_format_start(Selection cursor, Paragraphs pars)

@@ -18,6 +18,8 @@ namespace cactus
             int parCount = thisDoc.Paragraphs.Count;
             Selection cursor = Globals.ThisAddIn.Application.Selection;
 
+            cursor.WholeStory();
+
             cursor.ParagraphFormat.SpaceBeforeAuto = 0;
             cursor.ParagraphFormat.SpaceAfterAuto = 0;
             cursor.ParagraphFormat.LeftIndent = 0;
