@@ -36,10 +36,10 @@
         {
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
-            this.separator1 = this.Factory.CreateRibbonSeparator();
             this.button1 = this.Factory.CreateRibbonButton();
             this.button2 = this.Factory.CreateRibbonButton();
             this.button7 = this.Factory.CreateRibbonButton();
+            this.separator1 = this.Factory.CreateRibbonSeparator();
             this.splitButton1 = this.Factory.CreateRibbonSplitButton();
             this.button6 = this.Factory.CreateRibbonButton();
             this.button4 = this.Factory.CreateRibbonButton();
@@ -59,16 +59,12 @@
             // 
             this.group1.Items.Add(this.button1);
             this.group1.Items.Add(this.button2);
-            this.group1.Items.Add(this.button7);
             this.group1.Items.Add(this.separator1);
+            this.group1.Items.Add(this.button7);
             this.group1.Items.Add(this.splitButton1);
             this.group1.Items.Add(this.button3);
             this.group1.Label = "审阅工具";
             this.group1.Name = "group1";
-            // 
-            // separator1
-            // 
-            this.separator1.Name = "separator1";
             // 
             // button1
             // 
@@ -92,12 +88,12 @@
             // 
             // button7
             // 
-            this.button7.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.button7.Image = global::cactus.Properties.Resources.catalog;
-            this.button7.Label = "制作汇编目录";
+            this.button7.Label = "";
             this.button7.Name = "button7";
-            this.button7.ShowImage = true;
-            this.button7.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button7_Click);
+            // 
+            // separator1
+            // 
+            this.separator1.Name = "separator1";
             // 
             // splitButton1
             // 

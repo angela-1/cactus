@@ -57,11 +57,5 @@ namespace cactus
             f.Show();
         }
 
-        private void button7_Click(object sender, RibbonControlEventArgs e)
-        {
-            Toc toc = new Toc();
-            toc.doFormat();
-
-        }
     }
 }
