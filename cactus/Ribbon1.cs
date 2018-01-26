@@ -10,7 +10,7 @@ namespace cactus
             button1.Label = "导出批注\n";
             button2.Label = "套用格式\n";
             button3.Label = "查找内容\n";
-            button7.Label = "制作\n汇编目录\n";
+            //button7.Label = "制作\n汇编目录\n";
         }
 
         private void button1_Click(object sender, RibbonControlEventArgs e)
@@ -48,7 +48,7 @@ namespace cactus
         private void button5_Click(object sender, RibbonControlEventArgs e)
         {
             TitleFinder t2 = new TitleFinder(2);
-            t2.GetContent();
+            t2.GetContent2();
         }
 
         private void button3_Click(object sender, RibbonControlEventArgs e)

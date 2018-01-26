@@ -62,6 +62,48 @@ namespace cactus
             return draft_list;
         }
 
+        private List<String> _search2()
+        {
+            Document this_doc = Globals.ThisAddIn.Application.ActiveDocument;
+            Paragraphs pars = this_doc.Paragraphs;
+
+            List<String> draft_list = new List<String>();
+            WdOutlineLevel level = WdOutlineLevel.wdOutlineLevel1;
+
+
+
+            //if (type == 1)
+            //{
+            //    reg = reLevel1;
+            //    level = WdOutlineLevel.wdOutlineLevel1;
+            //}
+            //else
+            //{
+            //    reg = reLevel2;
+            //    level = WdOutlineLevel.wdOutlineLevel2;
+            //}
+
+            foreach (Paragraph par in pars)
+            {
+                String line = par.Range.Text.Trim();
+                Match match1 = reLevel1.Match(line);
+                Match match2 = reLevel2.Match(line);
+                if (match1.Success)
+                {
+                    String b = match1.Groups[0].ToString();
+                    draft_list.Add(line);
+                } else if ( match2.Success) {
+                    String b = match2.Groups[0].ToString();
+                    draft_list.Add(line);
+                }
+
+                //if (par.OutlineLevel == level)
+                //{
+                //    draft_list.Add(line);
+                //}
+            }
+            return draft_list;
+        }
         //private List<String> __parse_file()
         //{
         //    StreamReader sr = new StreamReader(tmp_file, Encoding.Default);
@@ -150,5 +192,21 @@ namespace cactus
             }
             
         }
+
+
+        public void GetContent2()
+        {
+            List<String> list = _search2();
+            if (list.Count > 0)
+            {
+                _print_to_file(list);
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("未找到符合条件的项。");
+            }
+
+        }
+
     }
 }

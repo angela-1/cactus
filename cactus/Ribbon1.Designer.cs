@@ -38,7 +38,6 @@
             this.group1 = this.Factory.CreateRibbonGroup();
             this.button1 = this.Factory.CreateRibbonButton();
             this.button2 = this.Factory.CreateRibbonButton();
-            this.button7 = this.Factory.CreateRibbonButton();
             this.separator1 = this.Factory.CreateRibbonSeparator();
             this.splitButton1 = this.Factory.CreateRibbonSplitButton();
             this.button6 = this.Factory.CreateRibbonButton();
@@ -60,7 +59,6 @@
             this.group1.Items.Add(this.button1);
             this.group1.Items.Add(this.button2);
             this.group1.Items.Add(this.separator1);
-            this.group1.Items.Add(this.button7);
             this.group1.Items.Add(this.splitButton1);
             this.group1.Items.Add(this.button3);
             this.group1.Label = "审阅工具";
@@ -85,11 +83,6 @@
             this.button2.ShowImage = true;
             this.button2.SuperTip = "按照公文样式要求对文档样式进行修改。";
             this.button2.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button2_Click);
-            // 
-            // button7
-            // 
-            this.button7.Label = "";
-            this.button7.Name = "button7";
             // 
             // separator1
             // 
@@ -167,7 +160,6 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button5;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button6;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button3;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button7;
     }
 
     partial class ThisRibbonCollection
