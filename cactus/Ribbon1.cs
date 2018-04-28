@@ -6,10 +6,10 @@ namespace cactus
     {
         private void Ribbon1_Load(object sender, RibbonUIEventArgs e)
         {
-            splitButton1.Label = "提取内容\n";
-            button1.Label = "导出批注\n";
-            button2.Label = "套用格式\n";
-            button3.Label = "查找内容\n";
+            splitButton1.Label = "提取\n内容";
+            button1.Label = "导出\n批注";
+            button2.Label = "套用\n格式";
+            button3.Label = "查找\n内容";
             //button7.Label = "制作\n汇编目录\n";
         }
 
