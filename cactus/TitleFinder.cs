@@ -1,12 +1,7 @@
 ﻿using Microsoft.Office.Interop.Word;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace cactus
 {
@@ -68,7 +63,7 @@ namespace cactus
             Paragraphs pars = this_doc.Paragraphs;
 
             List<String> draft_list = new List<String>();
-            WdOutlineLevel level = WdOutlineLevel.wdOutlineLevel1;
+            //WdOutlineLevel level = WdOutlineLevel.wdOutlineLevel1;
 
 
 

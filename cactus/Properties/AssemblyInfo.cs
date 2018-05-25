@@ -11,7 +11,7 @@ using System.Security;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("cactus")]
-[assembly: AssemblyCopyright("Copyright ©  2017 Angela")]
+[assembly: AssemblyCopyright("Copyright ©  2017-2018 Angela")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
