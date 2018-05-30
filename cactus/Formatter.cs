@@ -82,12 +82,14 @@ namespace cactus
                 {
                     par.Range.Font.Name = "黑体";
                     par.Range.Font.NameAscii = "Tmimes New Roman";
+                    par.Range.ParagraphFormat.OutlineLevel = WdOutlineLevel.wdOutlineLevel1;
                 }
                 // 二级标题楷体
                 else if (level2FontLock && reLevel2.IsMatch(lineStart))
                 {
                     par.Range.Font.Name = "方正楷体_GBK";
                     par.Range.Font.NameAscii = "Tmimes New Roman";
+                    par.Range.ParagraphFormat.OutlineLevel = WdOutlineLevel.wdOutlineLevel2;
                 }
                 // 三级和其他全部都是方正仿宋
                 else
