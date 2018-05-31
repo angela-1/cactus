@@ -36,15 +36,15 @@
         {
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
-            this.button1 = this.Factory.CreateRibbonButton();
-            this.button2 = this.Factory.CreateRibbonButton();
             this.separator1 = this.Factory.CreateRibbonSeparator();
+            this.separator2 = this.Factory.CreateRibbonSeparator();
+            this.button2 = this.Factory.CreateRibbonButton();
             this.splitButton1 = this.Factory.CreateRibbonSplitButton();
             this.button6 = this.Factory.CreateRibbonButton();
             this.button4 = this.Factory.CreateRibbonButton();
             this.button5 = this.Factory.CreateRibbonButton();
             this.button3 = this.Factory.CreateRibbonButton();
-            this.separator2 = this.Factory.CreateRibbonSeparator();
+            this.button1 = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             this.SuspendLayout();
@@ -66,29 +66,23 @@
             this.group1.Label = "审阅工具";
             this.group1.Name = "group1";
             // 
-            // button1
+            // separator1
             // 
-            this.button1.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.button1.Image = global::cactus.Properties.Resources.comment;
-            this.button1.Label = "导出批注";
-            this.button1.Name = "button1";
-            this.button1.ShowImage = true;
-            this.button1.SuperTip = "导出文档中的批注，包括页数、行数、原文、意见。";
-            this.button1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click);
+            this.separator1.Name = "separator1";
+            // 
+            // separator2
+            // 
+            this.separator2.Name = "separator2";
             // 
             // button2
             // 
             this.button2.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
             this.button2.Image = global::cactus.Properties.Resources.brush;
-            this.button2.Label = "套用格式";
+            this.button2.Label = "套用样式";
             this.button2.Name = "button2";
             this.button2.ShowImage = true;
             this.button2.SuperTip = "按照公文样式要求对文档样式进行修改。";
             this.button2.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button2_Click);
-            // 
-            // separator1
-            // 
-            this.separator1.Name = "separator1";
             // 
             // splitButton1
             // 
@@ -136,9 +130,15 @@
             this.button3.SuperTip = "按用户输入的关键字查找内容，并提取找到关键字的段落到新文档中。";
             this.button3.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button3_Click);
             // 
-            // separator2
+            // button1
             // 
-            this.separator2.Name = "separator2";
+            this.button1.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.button1.Image = global::cactus.Properties.Resources.comment;
+            this.button1.Label = "导出批注";
+            this.button1.Name = "button1";
+            this.button1.ShowImage = true;
+            this.button1.SuperTip = "导出文档中的批注，包括页数、行数、原文、意见。";
+            this.button1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click);
             // 
             // Ribbon1
             // 

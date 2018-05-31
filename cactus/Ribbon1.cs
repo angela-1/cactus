@@ -8,19 +8,15 @@ namespace cactus
         {
             splitButton1.Label = "提取\n内容";
             button1.Label = "导出\n批注";
-            button2.Label = "套用\n格式";
+            button2.Label = "套用\n样式";
             button3.Label = "查找\n内容";
-            //button7.Label = "制作\n汇编目录\n";
         }
 
         private void button1_Click(object sender, RibbonControlEventArgs e)
         {
             CommentFinder comment = new CommentFinder();
             comment.GetContent();
-
         }
-
-
      
         private void button2_Click(object sender, RibbonControlEventArgs e)
         {
@@ -56,6 +52,5 @@ namespace cactus
             Form1 f = new Form1();
             f.Show();
         }
-
     }
 }
