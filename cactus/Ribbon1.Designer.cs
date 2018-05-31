@@ -44,6 +44,7 @@
             this.button4 = this.Factory.CreateRibbonButton();
             this.button5 = this.Factory.CreateRibbonButton();
             this.button3 = this.Factory.CreateRibbonButton();
+            this.separator2 = this.Factory.CreateRibbonSeparator();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             this.SuspendLayout();
@@ -56,11 +57,12 @@
             // 
             // group1
             // 
-            this.group1.Items.Add(this.button1);
             this.group1.Items.Add(this.button2);
             this.group1.Items.Add(this.separator1);
             this.group1.Items.Add(this.splitButton1);
             this.group1.Items.Add(this.button3);
+            this.group1.Items.Add(this.separator2);
+            this.group1.Items.Add(this.button1);
             this.group1.Label = "审阅工具";
             this.group1.Name = "group1";
             // 
@@ -134,6 +136,10 @@
             this.button3.SuperTip = "按用户输入的关键字查找内容，并提取找到关键字的段落到新文档中。";
             this.button3.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button3_Click);
             // 
+            // separator2
+            // 
+            this.separator2.Name = "separator2";
+            // 
             // Ribbon1
             // 
             this.Name = "Ribbon1";
@@ -160,6 +166,7 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button5;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button6;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button3;
+        internal Microsoft.Office.Tools.Ribbon.RibbonSeparator separator2;
     }
 
     partial class ThisRibbonCollection
