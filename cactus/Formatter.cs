@@ -68,6 +68,7 @@ namespace cactus
 
                 // 需要格式化的从开头到结尾都是首行缩进2字符，三号字，固定行距28磅
                 par.CharacterUnitFirstLineIndent = 2;
+                par.Range.Font.NameAscii = "Tmimes New Roman";
                 par.Range.Font.Size = 16;
                 par.Range.Font.Bold = 0;
                 par.LineSpacingRule = WdLineSpacing.wdLineSpaceExactly;
@@ -81,14 +82,12 @@ namespace cactus
                 if (level1FontLock && reLevel1.IsMatch(lineStart))
                 {
                     par.Range.Font.Name = "黑体";
-                    par.Range.Font.NameAscii = "Tmimes New Roman";
                     par.Range.ParagraphFormat.OutlineLevel = WdOutlineLevel.wdOutlineLevel1;
                 }
                 // 二级标题楷体
                 else if (level2FontLock && reLevel2.IsMatch(lineStart))
                 {
                     par.Range.Font.Name = "方正楷体_GBK";
-                    par.Range.Font.NameAscii = "Tmimes New Roman";
                     par.Range.ParagraphFormat.OutlineLevel = WdOutlineLevel.wdOutlineLevel2;
                 }
                 // 三级和其他全部都是方正仿宋
@@ -96,7 +95,6 @@ namespace cactus
                 {
                     par.Range.Font.Size = 16;
                     par.Range.Font.Name = "方正仿宋_GBK";
-                    par.Range.Font.NameAscii = "Tmimes New Roman";
                 }
             }
 
