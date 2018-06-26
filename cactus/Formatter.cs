@@ -9,10 +9,12 @@ namespace cactus
         // 按照公文要求修改文档格式
         public void doFormat()
         {
-            Document thisDoc = Globals.ThisAddIn.Application.ActiveDocument;
+            Application app = Globals.ThisAddIn.Application;
+            Document thisDoc = app.ActiveDocument;
             Paragraphs pars = thisDoc.Paragraphs;
             int parCount = thisDoc.Paragraphs.Count;
-            Selection cursor = Globals.ThisAddIn.Application.Selection;
+            Selection cursor = app.Selection;
+            cursor.ClearFormatting();
 
             thisDoc.Content.ListFormat.ConvertNumbersToText();
 
@@ -67,14 +69,22 @@ namespace cactus
                 Paragraph par = pars[i];
 
                 // 需要格式化的从开头到结尾都是首行缩进2字符，三号字，固定行距28磅
+                par.LeftIndent = app.CentimetersToPoints(0);
+                par.RightIndent = app.CentimetersToPoints(0);
+                par.SpaceBefore = 0;
+                par.SpaceBeforeAuto = 0;
+                par.SpaceAfter = 0;
+                par.SpaceAfterAuto = 0;
+                par.LineSpacingRule = WdLineSpacing.wdLineSpaceExactly;
+                par.LineSpacing = 28;
+                par.CharacterUnitLeftIndent = 0;
+                par.CharacterUnitRightIndent = 0;
                 par.CharacterUnitFirstLineIndent = 2;
                 par.Range.Font.NameAscii = "Tmimes New Roman";
                 par.Range.Font.Size = 16;
                 par.Range.Font.Bold = 0;
-                par.LineSpacingRule = WdLineSpacing.wdLineSpaceExactly;
-                par.LineSpacing = 28;
-                par.SpaceBefore = 0;
-                par.SpaceAfter = 0;
+                par.LineUnitBefore = 0;
+                par.LineUnitAfter = 0;
 
                 string lineStart = par.Range.Text;
 
