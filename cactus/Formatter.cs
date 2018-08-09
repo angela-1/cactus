@@ -7,7 +7,7 @@ namespace cactus
     class Formatter
     {
         // 按照公文要求修改文档格式
-        public void doFormat()
+        public void DoFormat()
         {
             Application app = Globals.ThisAddIn.Application;
             Document thisDoc = app.ActiveDocument;

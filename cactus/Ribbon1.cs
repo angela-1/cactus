@@ -21,7 +21,7 @@ namespace cactus
         private void button2_Click(object sender, RibbonControlEventArgs e)
         {
             Formatter format = new Formatter();
-            format.doFormat();
+            format.DoFormat();
         }
 
         private void splitButton1_Click(object sender, RibbonControlEventArgs e)
