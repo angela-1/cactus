@@ -67,7 +67,6 @@ namespace cactus
             for (int i = startFormatPar; i < endFormatPar; i++)
             {
                 Paragraph par = pars[i];
-
                 // 需要格式化的从开头到结尾都是首行缩进2字符，三号字，固定行距28磅
                 par.LeftIndent = app.CentimetersToPoints(0);
                 par.RightIndent = app.CentimetersToPoints(0);
@@ -93,6 +92,7 @@ namespace cactus
                     par.Range.Font.Name = "黑体";
                     par.Range.Font.NameAscii = "Tmimes New Roman";
                     par.Range.ParagraphFormat.OutlineLevel = WdOutlineLevel.wdOutlineLevel1;
+                    par.Range.ParagraphFormat.KeepWithNext = -1;
                 }
                 // 二级标题楷体
                 else if (level2FontLock && reLevel2.IsMatch(lineStart))
@@ -100,6 +100,7 @@ namespace cactus
                     par.Range.Font.Name = "方正楷体_GBK";
                     par.Range.Font.NameAscii = "Times New Roman";
                     par.Range.ParagraphFormat.OutlineLevel = WdOutlineLevel.wdOutlineLevel2;
+                    par.Range.ParagraphFormat.KeepWithNext = -1;
                 }
                 // 三级和其他全部都是方正仿宋
                 else
