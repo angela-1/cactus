@@ -52,5 +52,11 @@ namespace cactus
             Form1 f = new Form1();
             f.Show();
         }
+
+        private void button7_Click(object sender, RibbonControlEventArgs e)
+        {
+            DocumentObject doc = new DocumentObject();
+            doc.GetContent();
+        }
     }
 }

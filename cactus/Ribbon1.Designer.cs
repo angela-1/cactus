@@ -36,15 +36,16 @@
         {
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
-            this.separator1 = this.Factory.CreateRibbonSeparator();
-            this.separator2 = this.Factory.CreateRibbonSeparator();
             this.button2 = this.Factory.CreateRibbonButton();
+            this.separator1 = this.Factory.CreateRibbonSeparator();
             this.splitButton1 = this.Factory.CreateRibbonSplitButton();
             this.button6 = this.Factory.CreateRibbonButton();
             this.button4 = this.Factory.CreateRibbonButton();
             this.button5 = this.Factory.CreateRibbonButton();
             this.button3 = this.Factory.CreateRibbonButton();
             this.button1 = this.Factory.CreateRibbonButton();
+            this.button7 = this.Factory.CreateRibbonButton();
+            this.separator2 = this.Factory.CreateRibbonSeparator();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             this.SuspendLayout();
@@ -61,18 +62,11 @@
             this.group1.Items.Add(this.separator1);
             this.group1.Items.Add(this.splitButton1);
             this.group1.Items.Add(this.button3);
-            this.group1.Items.Add(this.separator2);
             this.group1.Items.Add(this.button1);
+            this.group1.Items.Add(this.button7);
+            this.group1.Items.Add(this.separator2);
             this.group1.Label = "审阅工具";
             this.group1.Name = "group1";
-            // 
-            // separator1
-            // 
-            this.separator1.Name = "separator1";
-            // 
-            // separator2
-            // 
-            this.separator2.Name = "separator2";
             // 
             // button2
             // 
@@ -83,6 +77,10 @@
             this.button2.ShowImage = true;
             this.button2.SuperTip = "按照公文样式要求对文档样式进行修改。";
             this.button2.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button2_Click);
+            // 
+            // separator1
+            // 
+            this.separator1.Name = "separator1";
             // 
             // splitButton1
             // 
@@ -140,6 +138,19 @@
             this.button1.SuperTip = "导出文档中的批注，包括页数、行数、原文、意见。";
             this.button1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click);
             // 
+            // button7
+            // 
+            this.button7.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.button7.Image = global::cactus.Properties.Resources.json;
+            this.button7.Label = "文档对象";
+            this.button7.Name = "button7";
+            this.button7.ShowImage = true;
+            this.button7.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button7_Click);
+            // 
+            // separator2
+            // 
+            this.separator2.Name = "separator2";
+            // 
             // Ribbon1
             // 
             this.Name = "Ribbon1";
@@ -167,6 +178,7 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button6;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button3;
         internal Microsoft.Office.Tools.Ribbon.RibbonSeparator separator2;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button7;
     }
 
     partial class ThisRibbonCollection

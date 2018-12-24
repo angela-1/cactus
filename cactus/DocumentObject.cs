@@ -1,0 +1,175 @@
+﻿using Microsoft.Office.Interop.Word;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace cactus
+{
+    class DocumentObject : AFinder
+    {
+        public string title;
+        public string code;
+        public string sendBy;
+        public string sendTo;
+        public string sendDate;
+
+        public override void GetContent()
+        {
+            int flag = 0;
+
+            List<String> contents = _parse_contents();
+            if (contents.Count == 1)
+            {
+                MessageBox.Show("文件为空。");
+                return;
+            }
+            List<String> result = new List<String>();
+            bool isTitleLine = false;
+            String title = "";
+
+            foreach (var line in contents)
+            {
+                if ((flag & 1) == 0)
+                {
+                    String code = _get_code(line.Trim());
+                    if (code.Length > 0)
+                    {
+                        result.Add(code);
+                        this.code = code;
+                        flag = flag | 1;
+                        continue;
+                    }
+                }
+
+                if ((flag & 2) == 0)
+                {
+                    if (isTitleLine)
+                    {
+                        title += line.Trim();
+                    }
+
+                    if (_is_title_line(line))
+                    {
+                        title += line.Trim();
+                        isTitleLine = true;
+                    }
+
+                    if (_is_white_line(line) && isTitleLine)
+                    {
+                        result.Add(title);
+                        this.title = title;
+                        flag = flag | 2;
+                        isTitleLine = false;
+                        continue;
+                    }
+                }
+
+                if ((flag & 4) == 0)
+                {
+                    String send_to = _get_send_to(line.Trim());
+                    if (send_to.Length > 0)
+                    {
+                        result.Add(send_to);
+                        this.sendTo = send_to;
+                        flag = flag | 4;
+                        continue;
+                    }
+                }
+
+                if ((flag & 8) == 0)
+                {
+                    String send_date = _get_send_date(line.Trim());
+                    if (send_date.Length > 0)
+                    {
+                        int ind = contents.IndexOf(line);
+                        result.Add(contents[ind - 1].Trim());
+                        result.Add(send_date);
+                        this.sendBy = contents[ind - 1].Trim();
+                        this.sendDate = send_date;
+                        flag = flag | 8;
+                        continue;
+                    }
+                }
+
+
+
+
+
+            }
+            string json = JsonConvert.SerializeObject(this);
+            Clipboard.SetDataObject(json);
+            MessageBox.Show("文件对象已经存入剪贴板。请使用 Ctrl+v 粘贴。");
+        }
+
+        private String _get_code(String par)
+        {
+            String value = "";
+            Regex reg = new Regex(@"\S+〔\d{4}〕\d+号");
+            Match match = reg.Match(par);
+            if (match.Success)
+            {
+                value = match.Value;
+            }
+            return value;
+        }
+
+        private String _get_send_to(String par)
+        {
+            String value = "";
+            Regex reg = new Regex(@"\S+[：:]$");
+            Match match = reg.Match(par);
+            if (match.Success)
+            {
+                value = match.Value;
+            }
+            return value;
+        }
+
+        private String _get_send_date(String par)
+        {
+            String value = "";
+            Regex reg = new Regex(@"^\d{4}年\d{1,2}月\d{1,2}日$");
+            Match match = reg.Match(par);
+            if (match.Success)
+            {
+                value = match.Value;
+            }
+            return value;
+        }
+
+
+
+        private bool _is_title_line(String par)
+        {
+            Regex reg = new Regex(@"关于\S+");
+            Match match = reg.Match(par);
+            return match.Success;
+        }
+
+        private bool _is_white_line(String par)
+        {
+            Regex reg = new Regex(@"^\s$");
+            Match match = reg.Match(par);
+            return match.Success;
+        }
+
+        private List<String> _parse_contents()
+        {
+            Document thisDoc = Globals.ThisAddIn.Application.ActiveDocument;
+            Paragraphs pars = thisDoc.Paragraphs;
+            int parCount = thisDoc.Paragraphs.Count;
+
+            List<String> draft_list = new List<String>();
+            foreach (Paragraph par in pars)
+            {
+                draft_list.Add(par.Range.Text);
+            }
+            return draft_list;
+        }
+    }
+}
