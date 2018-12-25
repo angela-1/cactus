@@ -12,11 +12,11 @@ namespace cactus
 {
     class DocumentObject : AFinder
     {
-        public string title;
-        public string code;
-        public string sendBy;
-        public string sendTo;
-        public string sendDate;
+        public string title = "";
+        public string code = "";
+        public string sendBy = "";
+        public string sendTo = "";
+        public string sendDate = "";
 
         public override void GetContent()
         {
@@ -30,13 +30,13 @@ namespace cactus
             }
             List<String> result = new List<String>();
             bool isTitleLine = false;
-            String title = "";
+            string title = "";
 
             foreach (var line in contents)
             {
-                if ((flag & 1) == 0)
+                if ((flag & 1) == 0 && (flag & 2) == 0)
                 {
-                    String code = _get_code(line.Trim());
+                    string code = _get_code(line.Trim());
                     if (code.Length > 0)
                     {
                         result.Add(code);
@@ -71,7 +71,7 @@ namespace cactus
 
                 if ((flag & 4) == 0)
                 {
-                    String send_to = _get_send_to(line.Trim());
+                    string send_to = _get_send_to(line.Trim());
                     if (send_to.Length > 0)
                     {
                         result.Add(send_to);
@@ -83,7 +83,7 @@ namespace cactus
 
                 if ((flag & 8) == 0)
                 {
-                    String send_date = _get_send_date(line.Trim());
+                    string send_date = _get_send_date(line.Trim());
                     if (send_date.Length > 0)
                     {
                         int ind = contents.IndexOf(line);
@@ -96,19 +96,20 @@ namespace cactus
                     }
                 }
 
-
-
-
-
+                if (flag == 0b1111)
+                {
+                    break;
+                }
             }
+
             string json = JsonConvert.SerializeObject(this);
             Clipboard.SetDataObject(json);
             MessageBox.Show("文件对象已经存入剪贴板。请使用 Ctrl+v 粘贴。");
         }
 
-        private String _get_code(String par)
+        private string _get_code(string par)
         {
-            String value = "";
+            string value = "";
             Regex reg = new Regex(@"\S+〔\d{4}〕\d+号");
             Match match = reg.Match(par);
             if (match.Success)
@@ -118,9 +119,9 @@ namespace cactus
             return value;
         }
 
-        private String _get_send_to(String par)
+        private string _get_send_to(string par)
         {
-            String value = "";
+            string value = "";
             Regex reg = new Regex(@"\S+[：:]$");
             Match match = reg.Match(par);
             if (match.Success)
@@ -130,9 +131,9 @@ namespace cactus
             return value;
         }
 
-        private String _get_send_date(String par)
+        private string _get_send_date(string par)
         {
-            String value = "";
+            string value = "";
             Regex reg = new Regex(@"^\d{4}年\d{1,2}月\d{1,2}日$");
             Match match = reg.Match(par);
             if (match.Success)
@@ -144,14 +145,14 @@ namespace cactus
 
 
 
-        private bool _is_title_line(String par)
+        private bool _is_title_line(string par)
         {
             Regex reg = new Regex(@"关于\S+");
             Match match = reg.Match(par);
             return match.Success;
         }
 
-        private bool _is_white_line(String par)
+        private bool _is_white_line(string par)
         {
             Regex reg = new Regex(@"^\s$");
             Match match = reg.Match(par);
