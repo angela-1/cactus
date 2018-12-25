@@ -20,7 +20,7 @@ namespace cactus
 
         public override void GetContent()
         {
-            int flag = 0;
+            int flag = 0b0000;
 
             List<String> contents = _parse_contents();
             if (contents.Count == 1)
@@ -28,7 +28,6 @@ namespace cactus
                 MessageBox.Show("文件为空。");
                 return;
             }
-            List<String> result = new List<String>();
             bool isTitleLine = false;
             string title = "";
 
@@ -36,10 +35,9 @@ namespace cactus
             {
                 if ((flag & 1) == 0 && (flag & 2) == 0)
                 {
-                    string code = _get_code(line.Trim());
+                    string code = _get_code(line);
                     if (code.Length > 0)
                     {
-                        result.Add(code);
                         this.code = code;
                         flag = flag | 1;
                         continue;
@@ -55,13 +53,12 @@ namespace cactus
 
                     if (_is_title_line(line))
                     {
-                        title += line.Trim();
+                        title += line;
                         isTitleLine = true;
                     }
 
                     if (_is_white_line(line) && isTitleLine)
                     {
-                        result.Add(title);
                         this.title = title;
                         flag = flag | 2;
                         isTitleLine = false;
@@ -71,10 +68,9 @@ namespace cactus
 
                 if ((flag & 4) == 0)
                 {
-                    string send_to = _get_send_to(line.Trim());
+                    string send_to = _get_send_to(line);
                     if (send_to.Length > 0)
                     {
-                        result.Add(send_to);
                         this.sendTo = send_to;
                         flag = flag | 4;
                         continue;
@@ -83,13 +79,11 @@ namespace cactus
 
                 if ((flag & 8) == 0)
                 {
-                    string send_date = _get_send_date(line.Trim());
+                    string send_date = _get_send_date(line);
                     if (send_date.Length > 0)
                     {
                         int ind = contents.IndexOf(line);
-                        result.Add(contents[ind - 1].Trim());
-                        result.Add(send_date);
-                        this.sendBy = contents[ind - 1].Trim();
+                        this.sendBy = contents[ind - 1];
                         this.sendDate = send_date;
                         flag = flag | 8;
                         continue;
@@ -154,7 +148,7 @@ namespace cactus
 
         private bool _is_white_line(string par)
         {
-            Regex reg = new Regex(@"^\s$");
+            Regex reg = new Regex(@"^\s*$");
             Match match = reg.Match(par);
             return match.Success;
         }
@@ -168,7 +162,7 @@ namespace cactus
             List<String> draft_list = new List<String>();
             foreach (Paragraph par in pars)
             {
-                draft_list.Add(par.Range.Text);
+                draft_list.Add(par.Range.Text.Trim());
             }
             return draft_list;
         }
