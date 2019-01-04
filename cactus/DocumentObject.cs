@@ -20,6 +20,11 @@ namespace cactus
 
         public override void GetContent()
         {
+            // 标记各值是否取得
+            // 0b0001 文号
+            // 0b0010 标题
+            // 0b0100 主送
+            // 0b1000 发文日期
             int flag = 0b0000;
 
             List<String> contents = _parse_contents();
@@ -28,8 +33,7 @@ namespace cactus
                 MessageBox.Show("文件为空。");
                 return;
             }
-            bool isTitleLine = false;
-            string title = "";
+
 
             foreach (var line in contents)
             {
@@ -44,33 +48,25 @@ namespace cactus
                     }
                 }
 
-                if ((flag & 2) == 0)
-                {
-                    if (isTitleLine)
-                    {
-                        title += line.Trim();
-                    }
-
-                    if (_is_title_line(line))
-                    {
-                        title += line;
-                        isTitleLine = true;
-                    }
-
-                    if (_is_white_line(line) && isTitleLine)
-                    {
-                        this.title = title;
-                        flag = flag | 2;
-                        isTitleLine = false;
-                        continue;
-                    }
-                }
-
                 if ((flag & 4) == 0)
                 {
                     string send_to = _get_send_to(line);
                     if (send_to.Length > 0)
                     {
+                        int ind = contents.IndexOf(line);
+                        List<string> titleArray = new List<string>();
+                        for (int i = 2; i < ind; i++)
+                        {
+                            string t = contents[ind - i];
+                            titleArray.Add(t);
+                            if (_is_white_line(t))
+                            {
+                                titleArray.Reverse();
+                                this.title = string.Join("", titleArray);
+                                flag = flag | 2;
+                                break;
+                            }
+                        }
                         this.sendTo = send_to;
                         flag = flag | 4;
                         continue;
