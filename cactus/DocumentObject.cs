@@ -2,14 +2,13 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace cactus
 {
+
+
     class DocumentObject : AFinder
     {
         public string title = "";
@@ -27,6 +26,11 @@ namespace cactus
             // 0b1000 发文日期
             int flag = 0b0000;
 
+            const int HAS_CODE = 1;
+            const int HAS_TITLE = 2;
+            const int HAS_SEND_TO = 4;
+            const int HAS_SEND_DATE = 8;
+
             List<String> contents = _parse_contents();
             if (contents.Count == 1)
             {
@@ -37,7 +41,7 @@ namespace cactus
 
             foreach (var line in contents)
             {
-                if ((flag & 1) == 0 && (flag & 2) == 0)
+                if ((flag & HAS_CODE) == 0 && (flag & HAS_TITLE) == 0)
                 {
                     string code = _get_code(line);
                     if (code.Length > 0)
@@ -48,7 +52,7 @@ namespace cactus
                     }
                 }
 
-                if ((flag & 4) == 0)
+                if ((flag & HAS_SEND_TO) == 0)
                 {
                     string send_to = _get_send_to(line);
                     if (send_to.Length > 0)
@@ -73,7 +77,7 @@ namespace cactus
                     }
                 }
 
-                if ((flag & 8) == 0)
+                if ((flag & HAS_SEND_DATE) == 0)
                 {
                     string send_date = _get_send_date(line);
                     if (send_date.Length > 0)
@@ -131,15 +135,6 @@ namespace cactus
                 value = match.Value;
             }
             return value;
-        }
-
-
-
-        private bool _is_title_line(string par)
-        {
-            Regex reg = new Regex(@"关于\S+");
-            Match match = reg.Match(par);
-            return match.Success;
         }
 
         private bool _is_white_line(string par)
