@@ -19,6 +19,17 @@ namespace cactus
 
         public override void GetContent()
         {
+            if (this._parse_object())
+            {
+                string json = JsonConvert.SerializeObject(this);
+                Clipboard.SetDataObject(json);
+                MessageBox.Show("文件对象已经存入剪贴板。请使用 Ctrl+v 粘贴。");
+            }
+           
+        }
+
+        private bool _parse_object()
+        {
             // 标记各值是否取得
             // 0b0001 文号
             // 0b0010 标题
@@ -35,9 +46,10 @@ namespace cactus
             if (contents.Count == 1)
             {
                 MessageBox.Show("文件为空。");
-                return;
+                return false;
             }
 
+            bool hasTitle = false;
 
             foreach (var line in contents)
             {
@@ -59,11 +71,15 @@ namespace cactus
                     {
                         int ind = contents.IndexOf(line);
                         List<string> titleArray = new List<string>();
-                        for (int i = 2; i < ind; i++)
+                        for (int i = 1; i < ind; i++)
                         {
                             string t = contents[ind - i];
                             titleArray.Add(t);
-                            if (_is_white_line(t))
+                            if (t.Length > 0)
+                            {
+                                hasTitle = true;
+                            }
+                            if (_is_white_line(t) && hasTitle)
                             {
                                 titleArray.Reverse();
                                 this.title = string.Join("", titleArray);
@@ -95,12 +111,20 @@ namespace cactus
                     break;
                 }
             }
-
-            string json = JsonConvert.SerializeObject(this);
-            Clipboard.SetDataObject(json);
-            MessageBox.Show("文件对象已经存入剪贴板。请使用 Ctrl+v 粘贴。");
+            return true;
         }
+       
 
+        public void GetLineObject()
+        {
+            if (this._parse_object())
+            {
+                string line = this.sendDate + "\t" + this.code + "\t" + this.title;
+                Clipboard.SetDataObject(line);
+                MessageBox.Show("文件对象已经存入剪贴板。请使用 Ctrl+v 粘贴。");
+            }
+
+        }
         private string _get_code(string par)
         {
             string value = "";

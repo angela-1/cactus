@@ -58,5 +58,23 @@ namespace cactus
             DocumentObject doc = new DocumentObject();
             doc.GetContent();
         }
+
+        private void splitButton2_Click(object sender, RibbonControlEventArgs e)
+        {
+            DocumentObject doc = new DocumentObject();
+            doc.GetContent();
+        }
+
+        private void button8_Click(object sender, RibbonControlEventArgs e)
+        {
+            DocumentObject doc = new DocumentObject();
+            doc.GetContent();
+        }
+
+        private void button9_Click(object sender, RibbonControlEventArgs e)
+        {
+            DocumentObject doc = new DocumentObject();
+            doc.GetLineObject();
+        }
     }
 }

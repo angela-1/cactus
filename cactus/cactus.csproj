@@ -34,7 +34,7 @@
     <PublishUrl>C:\Users\angela\Desktop\cactus\</PublishUrl>
     <InstallUrl />
     <TargetCulture>zh-chs</TargetCulture>
-    <ApplicationVersion>1.0.0.26</ApplicationVersion>
+    <ApplicationVersion>1.0.0.31</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>false</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
@@ -206,6 +206,8 @@
     <EmbeddedResource Include="Ribbon1.resx">
       <DependentUpon>Ribbon1.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="cactus.pfx" />
+    <None Include="cactus_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -266,10 +268,10 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>cactus_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>cactus.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>CF5B36A27653A8B58F178BCEF70BC6C75D89E55D</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>986D6744D612D4D1AE092F5656212D742ABF99A1</ManifestCertificateThumbprint>
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
