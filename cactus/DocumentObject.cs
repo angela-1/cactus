@@ -25,7 +25,7 @@ namespace cactus
                 Clipboard.SetDataObject(json);
                 MessageBox.Show("文件对象已经存入剪贴板。请使用 Ctrl+v 粘贴。");
             }
-           
+
         }
 
         private bool _parse_object()
@@ -113,13 +113,13 @@ namespace cactus
             }
             return true;
         }
-       
+
 
         public void GetLineObject()
         {
             if (this._parse_object())
             {
-                string line = this.sendDate + "\t" + this.code + "\t" + this.title;
+                string line = this.sendDate + "\t" + this.sendBy + "\t" + this.code + "\t" + this.title;
                 Clipboard.SetDataObject(line);
                 MessageBox.Show("文件对象已经存入剪贴板。请使用 Ctrl+v 粘贴。");
             }
