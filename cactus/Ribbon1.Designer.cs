@@ -44,10 +44,10 @@
             this.button5 = this.Factory.CreateRibbonButton();
             this.button3 = this.Factory.CreateRibbonButton();
             this.button1 = this.Factory.CreateRibbonButton();
-            this.separator2 = this.Factory.CreateRibbonSeparator();
             this.splitButton2 = this.Factory.CreateRibbonSplitButton();
             this.button8 = this.Factory.CreateRibbonButton();
             this.button9 = this.Factory.CreateRibbonButton();
+            this.separator2 = this.Factory.CreateRibbonSeparator();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             this.SuspendLayout();
@@ -60,12 +60,12 @@
             // 
             // group1
             // 
-            this.group1.Items.Add(this.button2);
+            this.group1.Items.Add(this.splitButton2);
+            this.group1.Items.Add(this.button1);
             this.group1.Items.Add(this.separator1);
             this.group1.Items.Add(this.splitButton1);
             this.group1.Items.Add(this.button3);
-            this.group1.Items.Add(this.button1);
-            this.group1.Items.Add(this.splitButton2);
+            this.group1.Items.Add(this.button2);
             this.group1.Items.Add(this.separator2);
             this.group1.Label = "审阅工具";
             this.group1.Name = "group1";
@@ -140,10 +140,6 @@
             this.button1.SuperTip = "导出文档中的批注，包括页数、行数、原文、意见。";
             this.button1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click);
             // 
-            // separator2
-            // 
-            this.separator2.Name = "separator2";
-            // 
             // splitButton2
             // 
             this.splitButton2.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
@@ -167,6 +163,10 @@
             this.button9.Name = "button9";
             this.button9.ShowImage = true;
             this.button9.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button9_Click);
+            // 
+            // separator2
+            // 
+            this.separator2.Name = "separator2";
             // 
             // Ribbon1
             // 
