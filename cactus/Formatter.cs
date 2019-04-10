@@ -91,7 +91,9 @@ namespace cactus
                     par.Range.Font.Name = "黑体";
                     par.Range.Font.NameAscii = "Tmimes New Roman";
                     par.Range.ParagraphFormat.OutlineLevel = WdOutlineLevel.wdOutlineLevel1;
-                    par.Range.ParagraphFormat.KeepWithNext = -1;
+                    //par.Range.ParagraphFormat.KeepWithNext = -1 // 与下段同页
+                    //par.Range.ParagraphFormat.WidowControl = -1; // 孤行控制
+
                 }
                 // 二级标题楷体
                 else if (level2FontLock && reLevel2.IsMatch(onePar))
@@ -99,13 +101,16 @@ namespace cactus
                     par.Range.Font.Name = "方正楷体_GBK";
                     par.Range.Font.NameAscii = "Times New Roman";
                     par.Range.ParagraphFormat.OutlineLevel = WdOutlineLevel.wdOutlineLevel2;
-                    par.Range.ParagraphFormat.KeepWithNext = -1;
+                    //par.Range.ParagraphFormat.KeepWithNext = -1;
+                    //par.Range.ParagraphFormat.WidowControl = -1;
                 }
                 // 三级和其他全部都是方正仿宋
                 else
                 {
                     par.Range.Font.Name = "方正仿宋_GBK";
                     par.Range.Font.NameAscii = "Times New Roman";
+                    par.Range.ParagraphFormat.WidowControl = 0; // 不勾选 孤行控制 
+
                 }
             }
 
