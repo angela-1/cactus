@@ -71,7 +71,7 @@ namespace cactus
                     {
                         int ind = contents.IndexOf(line);
                         List<string> titleArray = new List<string>();
-                        for (int i = 1; i < ind; i++)
+                        for (int i = 1; i <= ind; i++)
                         {
                             string t = contents[ind - i];
                             titleArray.Add(t);
