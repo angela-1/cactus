@@ -36,17 +36,17 @@
         {
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
-            this.button2 = this.Factory.CreateRibbonButton();
+            this.splitButton2 = this.Factory.CreateRibbonSplitButton();
+            this.button8 = this.Factory.CreateRibbonButton();
+            this.button9 = this.Factory.CreateRibbonButton();
+            this.button1 = this.Factory.CreateRibbonButton();
             this.separator1 = this.Factory.CreateRibbonSeparator();
             this.splitButton1 = this.Factory.CreateRibbonSplitButton();
             this.button6 = this.Factory.CreateRibbonButton();
             this.button4 = this.Factory.CreateRibbonButton();
             this.button5 = this.Factory.CreateRibbonButton();
             this.button3 = this.Factory.CreateRibbonButton();
-            this.button1 = this.Factory.CreateRibbonButton();
-            this.splitButton2 = this.Factory.CreateRibbonSplitButton();
-            this.button8 = this.Factory.CreateRibbonButton();
-            this.button9 = this.Factory.CreateRibbonButton();
+            this.button2 = this.Factory.CreateRibbonButton();
             this.separator2 = this.Factory.CreateRibbonSeparator();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
@@ -70,15 +70,39 @@
             this.group1.Label = "审阅工具";
             this.group1.Name = "group1";
             // 
-            // button2
+            // splitButton2
             // 
-            this.button2.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.button2.Image = global::cactus.Properties.Resources.brush;
-            this.button2.Label = "套用样式";
-            this.button2.Name = "button2";
-            this.button2.ShowImage = true;
-            this.button2.SuperTip = "按照公文样式要求对文档样式进行修改。";
-            this.button2.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button2_Click);
+            this.splitButton2.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.splitButton2.Image = global::cactus.Properties.Resources.json;
+            this.splitButton2.Items.Add(this.button8);
+            this.splitButton2.Items.Add(this.button9);
+            this.splitButton2.Label = "文档对象";
+            this.splitButton2.Name = "splitButton2";
+            this.splitButton2.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.splitButton2_Click);
+            // 
+            // button8
+            // 
+            this.button8.Label = "JSON对象";
+            this.button8.Name = "button8";
+            this.button8.ShowImage = true;
+            this.button8.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button8_Click);
+            // 
+            // button9
+            // 
+            this.button9.Label = "行对象";
+            this.button9.Name = "button9";
+            this.button9.ShowImage = true;
+            this.button9.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button9_Click);
+            // 
+            // button1
+            // 
+            this.button1.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.button1.Image = global::cactus.Properties.Resources.comment;
+            this.button1.Label = "导出批注";
+            this.button1.Name = "button1";
+            this.button1.ShowImage = true;
+            this.button1.SuperTip = "导出文档中的批注，包括页数、行数、原文、意见。";
+            this.button1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click);
             // 
             // separator1
             // 
@@ -130,39 +154,15 @@
             this.button3.SuperTip = "按用户输入的关键字查找内容，并提取找到关键字的段落到新文档中。";
             this.button3.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button3_Click);
             // 
-            // button1
+            // button2
             // 
-            this.button1.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.button1.Image = global::cactus.Properties.Resources.comment;
-            this.button1.Label = "导出批注";
-            this.button1.Name = "button1";
-            this.button1.ShowImage = true;
-            this.button1.SuperTip = "导出文档中的批注，包括页数、行数、原文、意见。";
-            this.button1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click);
-            // 
-            // splitButton2
-            // 
-            this.splitButton2.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.splitButton2.Image = global::cactus.Properties.Resources.json;
-            this.splitButton2.Items.Add(this.button8);
-            this.splitButton2.Items.Add(this.button9);
-            this.splitButton2.Label = "文档对象";
-            this.splitButton2.Name = "splitButton2";
-            this.splitButton2.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.splitButton2_Click);
-            // 
-            // button8
-            // 
-            this.button8.Label = "JSON对象";
-            this.button8.Name = "button8";
-            this.button8.ShowImage = true;
-            this.button8.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button8_Click);
-            // 
-            // button9
-            // 
-            this.button9.Label = "行对象";
-            this.button9.Name = "button9";
-            this.button9.ShowImage = true;
-            this.button9.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button9_Click);
+            this.button2.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.button2.Image = global::cactus.Properties.Resources.brush;
+            this.button2.Label = "套用样式";
+            this.button2.Name = "button2";
+            this.button2.ShowImage = true;
+            this.button2.SuperTip = "按照公文样式要求对文档样式进行修改。";
+            this.button2.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button2_Click);
             // 
             // separator2
             // 

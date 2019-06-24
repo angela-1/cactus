@@ -140,7 +140,7 @@ namespace cactus
         private string _get_send_to(string par)
         {
             string value = "";
-            Regex reg = new Regex(@"\S+[：:]$");
+            Regex reg = new Regex(@"^\S+[：:]$");
             Match match = reg.Match(par);
             if (match.Success)
             {
