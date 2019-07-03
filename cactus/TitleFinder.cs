@@ -8,9 +8,9 @@ namespace cactus
     class TitleFinder : AFinder
     {
         // 查找一级标题并提取
-        private int type;
-        private Regex reLevel1;
-        private Regex reLevel2;
+        private readonly int type;
+        private readonly Regex reLevel1;
+        private readonly Regex reLevel2;
 
         public TitleFinder(int find_type)
         {
@@ -20,14 +20,14 @@ namespace cactus
         }
 
 
-        private List<String> _search()
+        private List<String> Search()
         {
             Document this_doc = Globals.ThisAddIn.Application.ActiveDocument;
             Paragraphs pars = this_doc.Paragraphs;
 
             List<String> draft_list = new List<String>();
-            Regex reg = null;
-            WdOutlineLevel level = WdOutlineLevel.wdOutlineLevel1;
+            Regex reg;
+            WdOutlineLevel level;
             if (type == 1)
             {
                 reg = reLevel1;
@@ -57,7 +57,7 @@ namespace cactus
             return draft_list;
         }
 
-        private List<String> _search2()
+        private List<String> Search2()
         {
             Document this_doc = Globals.ThisAddIn.Application.ActiveDocument;
             Paragraphs pars = this_doc.Paragraphs;
@@ -147,11 +147,10 @@ namespace cactus
         //    return title_list;
         //}
 
-        private void _print_to_file(List<String> final_list)
+        private void PrintToFile(List<String> final_list)
         {
-            Document newDoc = null;
             // Create An New Word   
-            newDoc = Globals.ThisAddIn.Application.Documents.Add();
+            Document newDoc = Globals.ThisAddIn.Application.Documents.Add();
             newDoc.Content.Paragraphs[1].Range.Font.Size = 16;
             newDoc.Content.Paragraphs[1].Range.Font.Name = "方正仿宋_GBK";
             newDoc.Content.Paragraphs[1].Range.Font.NameAscii = "Times New Roman";
@@ -176,10 +175,10 @@ namespace cactus
 
         public override void GetContent()
         {
-            List<String> list = _search();
+            List<String> list = Search();
             if (list.Count > 0)
             {
-                _print_to_file(list);
+                PrintToFile(list);
             }
             else
             {
@@ -191,10 +190,10 @@ namespace cactus
 
         public void GetContent2()
         {
-            List<String> list = _search2();
+            List<String> list = Search2();
             if (list.Count > 0)
             {
-                _print_to_file(list);
+                PrintToFile(list);
             }
             else
             {

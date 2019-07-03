@@ -12,7 +12,6 @@ namespace cactus
             Application app = Globals.ThisAddIn.Application;
             Document thisDoc = app.ActiveDocument;
             Paragraphs pars = thisDoc.Paragraphs;
-            int parCount = thisDoc.Paragraphs.Count;
             Selection cursor = app.Selection;
 
             // 自动编号的标题变成文字
@@ -29,8 +28,8 @@ namespace cactus
             }
 
             // 获取选中的要修改样式的开头段落和结尾段落
-            int startFormatPar = this._get_format_start(cursor, pars);
-            int endFormatPar = this._get_format_end(cursor, pars);
+            int startFormatPar = this.GetFormatStart(cursor, pars);
+            int endFormatPar = this.GetFormatEnd(cursor, pars);
 
             //System.Windows.Forms.MessageBox.Show("start par: " + startFormatPar
             //    + "end par:" + endFormatPar + "total par:" + parCount);
@@ -116,7 +115,7 @@ namespace cactus
 
             System.Windows.Forms.MessageBox.Show("格式化完成。");
         }
-        private int _get_format_end(Selection cursor, Paragraphs pars)
+        private int GetFormatEnd(Selection cursor, Paragraphs pars)
         {
             int endFormatPar = 0;
             foreach (Paragraph par in pars)
@@ -128,7 +127,7 @@ namespace cactus
             return endFormatPar + 1;
         }
 
-        private int _get_format_start(Selection cursor, Paragraphs pars)
+        private int GetFormatStart(Selection cursor, Paragraphs pars)
         {
             int startFormatPar = 0;
             foreach (Paragraph par in pars)

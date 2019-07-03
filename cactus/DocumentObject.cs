@@ -19,7 +19,7 @@ namespace cactus
 
         public override void GetContent()
         {
-            if (this._parse_object())
+            if (this.ParseContent())
             {
                 string json = JsonConvert.SerializeObject(this);
                 Clipboard.SetDataObject(json);
@@ -28,7 +28,7 @@ namespace cactus
 
         }
 
-        private bool _parse_object()
+        private bool ParseContent()
         {
             // 标记各值是否取得
             // 0b0001 文号
@@ -42,7 +42,7 @@ namespace cactus
             const int HAS_SEND_TO = 4;
             const int HAS_SEND_DATE = 8;
 
-            List<String> contents = _parse_contents();
+            List<String> contents = GetLines();
             if (contents.Count == 1)
             {
                 MessageBox.Show("文件为空。");
@@ -55,18 +55,18 @@ namespace cactus
             {
                 if ((flag & HAS_CODE) == 0 && (flag & HAS_TITLE) == 0)
                 {
-                    string code = _get_code(line);
+                    string code = GetCode(line);
                     if (code.Length > 0)
                     {
                         this.code = code;
-                        flag = flag | 1;
+                        flag |= HAS_CODE;
                         continue;
                     }
                 }
 
                 if ((flag & HAS_SEND_TO) == 0)
                 {
-                    string send_to = _get_send_to(line);
+                    string send_to = GetSendTo(line);
                     if (send_to.Length > 0)
                     {
                         int ind = contents.IndexOf(line);
@@ -79,34 +79,34 @@ namespace cactus
                             {
                                 hasTitle = true;
                             }
-                            if (_is_white_line(t) && hasTitle)
+                            if (IsWhiteLine(t) && hasTitle)
                             {
                                 titleArray.Reverse();
                                 this.title = string.Join("", titleArray);
-                                flag = flag | 2;
+                                flag |= HAS_TITLE;
                                 break;
                             }
                         }
                         this.sendTo = send_to;
-                        flag = flag | 4;
+                        flag |= HAS_SEND_TO;
                         continue;
                     }
                 }
 
                 if ((flag & HAS_SEND_DATE) == 0)
                 {
-                    string send_date = _get_send_date(line);
+                    string send_date = GetSendDate(line);
                     if (send_date.Length > 0)
                     {
                         int ind = contents.IndexOf(line);
                         this.sendBy = contents[ind - 1];
                         this.sendDate = send_date;
-                        flag = flag | 8;
+                        flag |= HAS_SEND_DATE;
                         continue;
                     }
                 }
 
-                if (flag == 0b1111)
+                if (flag == (HAS_CODE | HAS_TITLE | HAS_SEND_TO | HAS_SEND_DATE))
                 {
                     break;
                 }
@@ -117,7 +117,7 @@ namespace cactus
 
         public void GetLineObject()
         {
-            if (this._parse_object())
+            if (this.ParseContent())
             {
                 string line = this.sendDate + "\t" + this.sendBy + "\t" + this.code + "\t" + this.title;
                 Clipboard.SetDataObject(line);
@@ -125,10 +125,10 @@ namespace cactus
             }
 
         }
-        private string _get_code(string par)
+        private string GetCode(string par)
         {
             string value = "";
-            Regex reg = new Regex(@"\S+〔\d{4}〕\d+号");
+            Regex reg = new Regex(@"^\S+〔\d{4}〕\d+号");
             Match match = reg.Match(par);
             if (match.Success)
             {
@@ -137,7 +137,7 @@ namespace cactus
             return value;
         }
 
-        private string _get_send_to(string par)
+        private string GetSendTo(string par)
         {
             string value = "";
             Regex reg = new Regex(@"^\S+[：:]$");
@@ -149,7 +149,7 @@ namespace cactus
             return value;
         }
 
-        private string _get_send_date(string par)
+        private string GetSendDate(string par)
         {
             string value = "";
             Regex reg = new Regex(@"^\d{4}年\d{1,2}月\d{1,2}日$");
@@ -161,18 +161,17 @@ namespace cactus
             return value;
         }
 
-        private bool _is_white_line(string par)
+        private bool IsWhiteLine(string par)
         {
             Regex reg = new Regex(@"^\s*$");
             Match match = reg.Match(par);
             return match.Success;
         }
 
-        private List<String> _parse_contents()
+        private List<String> GetLines()
         {
             Document thisDoc = Globals.ThisAddIn.Application.ActiveDocument;
             Paragraphs pars = thisDoc.Paragraphs;
-            int parCount = thisDoc.Paragraphs.Count;
 
             List<String> draft_list = new List<String>();
             foreach (Paragraph par in pars)

@@ -8,7 +8,7 @@ namespace cactus
 {
     class DivisionFinder : AFinder
     {
-        private String _org;
+        private readonly String _org;
 
         public DivisionFinder(String org) : base()
         {
@@ -18,10 +18,10 @@ namespace cactus
 
         public override void GetContent()
         {
-            List<String> final_list = _search();
+            List<String> final_list = Search();
             if (final_list.Count > 0)
             {
-                _print_to_file(final_list);
+                PrintToFile(final_list);
             }
             else
             {
@@ -30,11 +30,10 @@ namespace cactus
         }
 
 
-        private List<String> _search()
+        private List<String> Search()
         {
             Document thisDoc = Globals.ThisAddIn.Application.ActiveDocument;
             Paragraphs pars = thisDoc.Paragraphs;
-            int parCount = thisDoc.Paragraphs.Count;
 
             List<String> draft_list = new List<String>();
             foreach (Paragraph par in pars)
@@ -50,10 +49,9 @@ namespace cactus
             return draft_list;
         }
 
-        private void _print_to_file(List<String> final_list)
+        private void PrintToFile(List<String> final_list)
         {
-            Document newDoc = null;
-            newDoc = Globals.ThisAddIn.Application.Documents.Add();
+            Document newDoc = Globals.ThisAddIn.Application.Documents.Add();
             newDoc.Content.Paragraphs[1].Range.Font.Size = 16;
             newDoc.Content.Paragraphs[1].Range.Font.Name = "方正仿宋_GBK";
             newDoc.Content.Paragraphs[1].Range.Font.NameAscii = "Times New Roman";

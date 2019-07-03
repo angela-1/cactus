@@ -10,11 +10,11 @@ namespace cactus
     {
         public override void GetContent()
         {
-            List<String> a = _search();
+            List<String> a = Search();
             if (a.Count > 0)
             {
-                SortedSet<String> b = _strip_brackets(a);
-                _print_to_file(b);
+                SortedSet<String> b = StripBrackets(a);
+                PrintToFile(b);
             }
             else
             {
@@ -22,7 +22,7 @@ namespace cactus
             }
         }
 
-        private List<String> _search()
+        private List<String> Search()
         {
             Document this_doc = Globals.ThisAddIn.Application.ActiveDocument;
             Paragraphs pars = this_doc.Paragraphs;
@@ -43,7 +43,7 @@ namespace cactus
             return draft_list;
         }
 
-        private SortedSet<String> _strip_brackets(List<String> draft_list)
+        private SortedSet<String> StripBrackets(List<String> draft_list)
         {
             SortedSet<String> final_list = new SortedSet<String>();
             char[] trimChars = { '（', '）', ' ' };
@@ -65,11 +65,10 @@ namespace cactus
             return final_list;
         }
 
-        private void _print_to_file(SortedSet<String> final_list)
+        private void PrintToFile(SortedSet<String> final_list)
         {
-            Document newDoc = null;
             // Create An New Word   
-            newDoc = Globals.ThisAddIn.Application.Documents.Add();
+            Document newDoc = Globals.ThisAddIn.Application.Documents.Add();
             newDoc.Content.Paragraphs[1].Range.Font.Size = 16;
             newDoc.Content.Paragraphs[1].Range.Font.Name = "方正仿宋_GBK";
             newDoc.Content.Paragraphs[1].Range.Font.NameAscii = "Times New Roman";

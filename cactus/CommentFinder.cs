@@ -36,12 +36,10 @@ namespace cactus
                 commentsArray[p, 3] = c.Range.Text;
                 //作者;
                 commentsArray[p, 4] = c.Author;
-                p = p + 1;
+                p += 1;
             }
-
-            Document newDoc = null;
             // Create An New Word   
-            newDoc = Globals.ThisAddIn.Application.Documents.Add();
+            Document newDoc = Globals.ThisAddIn.Application.Documents.Add();
             newDoc.Content.ParagraphFormat.CharacterUnitFirstLineIndent = 2;
             newDoc.Content.Paragraphs[1].Range.Font.Size = 16;
             newDoc.Content.Paragraphs[1].Range.Font.Name = "方正仿宋_GBK";
