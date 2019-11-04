@@ -119,7 +119,8 @@ namespace cactus
         {
             if (this.ParseContent())
             {
-                string line = this.sendDate + "\t" + this.sendBy + "\t" + this.code + "\t" + this.title;
+                //string line = this.sendDate + "\t" + this.sendBy + "\t" + this.code + "\t" + this.title;
+                string line = this.sendDate + "\t" + this.code + "\t" + this.title;
                 Clipboard.SetDataObject(line);
                 MessageBox.Show("文件对象已经存入剪贴板。请使用 Ctrl+v 粘贴。");
             }
