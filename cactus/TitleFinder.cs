@@ -20,12 +20,12 @@ namespace cactus
         }
 
 
-        private List<String> Search()
+        private List<string> Search()
         {
             Document this_doc = Globals.ThisAddIn.Application.ActiveDocument;
             Paragraphs pars = this_doc.Paragraphs;
 
-            List<String> draft_list = new List<String>();
+            List<string> draft_list = new List<string>();
             Regex reg;
             WdOutlineLevel level;
             if (type == 1)
@@ -41,11 +41,11 @@ namespace cactus
 
             foreach (Paragraph par in pars)
             {
-                String line = par.Range.Text.Trim();
+                string line = par.Range.Text.Trim();
                 Match match = reg.Match(line);
                 if (match.Success)
                 {
-                    String b = match.Groups[0].ToString();
+                    string b = match.Groups[0].ToString();
                     draft_list.Add(line);
                 }
 
@@ -57,12 +57,12 @@ namespace cactus
             return draft_list;
         }
 
-        private List<String> Search2()
+        private List<string> Search2()
         {
             Document this_doc = Globals.ThisAddIn.Application.ActiveDocument;
             Paragraphs pars = this_doc.Paragraphs;
 
-            List<String> draft_list = new List<String>();
+            List<string> draft_list = new List<string>();
             //WdOutlineLevel level = WdOutlineLevel.wdOutlineLevel1;
 
 
@@ -80,15 +80,13 @@ namespace cactus
 
             foreach (Paragraph par in pars)
             {
-                String line = par.Range.Text.Trim();
+                string line = par.Range.Text.Trim();
                 Match match1 = reLevel1.Match(line);
                 Match match2 = reLevel2.Match(line);
-                if (match1.Success)
+                if (match1.Success || par.OutlineLevel == WdOutlineLevel.wdOutlineLevel1)
                 {
-                    String b = match1.Groups[0].ToString();
                     draft_list.Add(line);
-                } else if ( match2.Success) {
-                    String b = match2.Groups[0].ToString();
+                } else if ( match2.Success || par.OutlineLevel == WdOutlineLevel.wdOutlineLevel2) {
                     draft_list.Add(line);
                 }
 
@@ -147,7 +145,7 @@ namespace cactus
         //    return title_list;
         //}
 
-        private void PrintToFile(List<String> final_list)
+        private void PrintToFile(List<string> final_list)
         {
             // Create An New Word   
             Document newDoc = Globals.ThisAddIn.Application.Documents.Add();
@@ -166,7 +164,7 @@ namespace cactus
             par.Range.InsertAfter(" ");
             par.Range.InsertParagraphAfter();
 
-            foreach (String item in final_list)
+            foreach (string item in final_list)
             {
                 par.Range.InsertAfter(item);
                 par.Range.InsertParagraphAfter();
@@ -175,7 +173,7 @@ namespace cactus
 
         public override void GetContent()
         {
-            List<String> list = Search();
+            List<string> list = Search();
             if (list.Count > 0)
             {
                 PrintToFile(list);
@@ -190,7 +188,7 @@ namespace cactus
 
         public void GetContent2()
         {
-            List<String> list = Search2();
+            List<string> list = Search2();
             if (list.Count > 0)
             {
                 PrintToFile(list);
